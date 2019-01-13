@@ -8,12 +8,18 @@ const String FAILURE = "not ok";
 
 void main() {
 	final testUseCase = TestUseCase();
+	// Either Variable that will hold a success (RIGHT) value
 	Either<Failure, TestResults> success;
+	// either variable that will hold a fail (LEFT) value
 	Either<Failure, TestResults> fail;
 
 	testUseCase(5, (e) => success = e);
 	testUseCase(null, (e) => fail = e);
 
+	///
+	/// Functional Programming conventions dictates Right
+	/// is used for Success
+	///
 	test('verify is success', () {
 		expect(success, TypeMatcher<Right>());
 	});
@@ -22,6 +28,10 @@ void main() {
 		expect(success.getOrElse(() => TestResults("Not OK")).result, equals(TEST_RESULT));
 	});
 
+	///
+	/// Functional Programming conventions dictates Left
+	/// is used for Failure
+	///
 	test('verify is failure', () {
 		expect(fail, TypeMatcher<Left>());
 	});
