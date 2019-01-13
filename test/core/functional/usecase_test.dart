@@ -19,7 +19,7 @@ void main() {
 	});
 
 	test('verify results', () {
-		expect(success.getOrElse(() => TestResults("Not OK")).result, TEST_RESULT);
+		expect(success.getOrElse(() => TestResults("Not OK")).result, equals(TEST_RESULT));
 	});
 
 	test('verify is failure', () {
@@ -29,7 +29,7 @@ void main() {
 	test('test failure message', () {
 		TestFailure failure;
 		fail.fold((f) => failure = f, (e) {});
-		expect(failure.message, FAILURE);
+		expect(failure.message, equals(FAILURE));
 	});
 
 }
